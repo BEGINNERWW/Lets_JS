@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>쿵쿵따</title>
+</head>
+<body>
+    <div><span id = "order">1</span> 번의 순서 </div>
+    <div>
+        <div>제시어 : <span id="word"></span></div>
+        <input type = "text" maxlength = "3" >
+        <button>입력</button>
+    </div>   
+    <script>
+        const number = parseInt(prompt("참여할 인원은 몇 명인가요?")); // prompt는 취소를 누르면 null >> Number / parseInt로 형변환시 NaN
+        console.log(number)
+        if(number){
+            const $button = document.querySelector('button');
+            const $input = document.querySelector('input');
+            const $order = document.querySelector('#order');
+            const $word = document.querySelector('#word');
+        
+            let word; //제시어
+            let newWord;
+        
+            const inputText = (event) => {
+                newWord = event.target.value;
+                console.log(newWord)
+
+            }
+
+            const btnClick = () => {
+                console.log("클릭")
+                if(!word || (word[word.length -1] === newWord[0] && newWord.length === 3)){
+                    word = newWord;
+                    $word.textContent = word;
+
+                    if(parseInt($order.textContent) < number){
+                        $order.textContent = parseInt($order.textContent) + 1;
+                    }else{
+                        $order.textContent =  1;
+                    }
+
+                }else {
+                    alert("Booooommmmm!");
+                }
+                $input.value = '';
+                $input.focus();
+            }
+            $button.addEventListener('click', btnClick);
+            $input.addEventListener('input', inputText);
+    
+        }
+    </script>    
+</body>
+</html>
